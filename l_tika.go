@@ -25,7 +25,7 @@ func main() {
 		work,
 	)
 
-	robot.Start()
+	go robot.Start()
 	fmt.Println("start toggle led!")
 	time.After(10)
 
