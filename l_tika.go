@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"time"
 
 	"gobot.io/x/gobot"
@@ -25,4 +26,10 @@ func main() {
 	)
 
 	robot.Start()
+	fmt.Println("start toggle led!")
+	time.After(10)
+
+	robot.Stop()
+	fmt.Println("stop toggle led!")
+	fmt.Println("bye!")
 }
