@@ -11,17 +11,20 @@ import (
 
 func main() {
 	r := raspi.NewAdaptor()
-	led := gpio.NewLedDriver(r, "7")
+	led7 := gpio.NewLedDriver(r, "7")
+	led11 := gpio.NewLedDriver(r, "11")
 
 	work := func() {
 		gobot.Every(100*time.Millisecond, func() {
-			led.Toggle()
+			led7.Toggle()
+			led11.Toggle()
 		})
 	}
 
 	robot := gobot.NewRobot("blinkBot",
 		[]gobot.Connection{r},
-		[]gobot.Device{led},
+		[]gobot.Device{led7},
+		[]gobot.Device{led11},
 		work,
 	)
 
