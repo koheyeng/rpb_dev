@@ -18,8 +18,9 @@ func main() {
 			fmt.Println("button 12 pressed")
 			led40.On()
 		})
+
 		button12.On(gpio.ButtonRelease, func(data interface{}) {
-			fmt.Println("button 12 pressed")
+			fmt.Println("button 12 released")
 			led40.Off()
 		})
 	}
@@ -30,5 +31,5 @@ func main() {
 		work,
 	)
 
-	go robot.Start()
+	robot.Start()
 }
