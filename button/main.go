@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"time"
 
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/gpio"
@@ -11,28 +10,22 @@ import (
 
 func main() {
 	r := raspi.NewAdaptor()
-	led7 := gpio.NewLedDriver(r, "7")
-	led11 := gpio.NewLedDriver(r, "11")
+	button18 := gpio.NewButtonDriver(r, "12", 0)
+	led40 := gpio.NewLedDriver(r, "40")
 
 	work := func() {
-		gobot.Every(100*time.Millisecond, func() {
-			led7.Toggle()
-			led11.Toggle()
-		})
+		if button18.Active {
+			led40.Start()
+		}
 	}
 
 	robot := gobot.NewRobot("blinkBot",
 		[]gobot.Connection{r},
-		[]gobot.Device{led7},
-		[]gobot.Device{led11},
+		[]gobot.Device{button18, led40},
 		work,
 	)
 
 	go robot.Start()
-	fmt.Println("start toggle led!")
-	time.Sleep(10 * time.Second)
-
 	robot.Stop()
-	fmt.Println("stop toggle led!")
 	fmt.Println("bye!")
 }
