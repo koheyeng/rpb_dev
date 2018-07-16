@@ -11,7 +11,6 @@ import (
 
 func main() {
 	r := raspi.NewAdaptor()
-	button18 := gpio.NewButtonDriver(r, "12", 0)
 	led40 := gpio.NewLedDriver(r, "40")
 
 	work := func() {
@@ -22,7 +21,7 @@ func main() {
 
 	robot := gobot.NewRobot("blinkBot",
 		[]gobot.Connection{r},
-		[]gobot.Device{button18, led40},
+		[]gobot.Device{led40},
 		work,
 	)
 
