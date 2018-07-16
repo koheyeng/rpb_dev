@@ -26,6 +26,7 @@ func main() {
 	)
 
 	go robot.Start()
+	time.Sleep(60 * time.Second)
 	robot.Stop()
 	fmt.Println("bye!")
 }
