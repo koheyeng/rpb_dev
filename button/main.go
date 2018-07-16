@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"time"
 
 	"gobot.io/x/gobot"
 	"gobot.io/x/gobot/drivers/gpio"
@@ -14,9 +15,9 @@ func main() {
 	led40 := gpio.NewLedDriver(r, "40")
 
 	work := func() {
-		if button18.Active {
-			led40.Start()
-		}
+		gobot.Every(100*time.Millisecond, func() {
+			led40.Toggle()
+		})
 	}
 
 	robot := gobot.NewRobot("blinkBot",
